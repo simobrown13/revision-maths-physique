@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Révision BTS MEC — Maths & Physique</title>
+<style>
+  :root{
+    --bg:#0f172a; --card:#1e293b; --card2:#273449; --ink:#e2e8f0; --muted:#94a3b8;
+    --accent:#38bdf8; --green:#34d399; --amber:#fbbf24; --line:#334155; --red:#f87171;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    line-height:1.5;font-size:16px;padding-bottom:84px;
+  }
+  header{
+    position:sticky;top:0;z-index:20;background:rgba(15,23,42,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+    padding:14px 16px calc(env(safe-area-inset-top) + 0px);padding-top:max(14px,env(safe-area-inset-top));
+  }
+  header h1{font-size:17px;margin:0;font-weight:700}
+  header .sub{font-size:12px;color:var(--muted);margin-top:2px}
+  header .jmark{color:var(--amber);font-weight:700}
+  main{padding:16px;max-width:760px;margin:0 auto}
+  section{display:none}
+  section.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  h2{font-size:20px;margin:4px 0 14px}
+  h3{font-size:16px;margin:20px 0 8px;color:var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 14px}
+  .why{background:linear-gradient(135deg,#1e3a5f,#1e293b);border-left:4px solid var(--amber);border-radius:10px;padding:12px 14px;margin:0 0 14px;font-size:14px}
+  .why b{color:var(--amber)}
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}
+  th,td{border:1px solid var(--line);padding:7px 8px;text-align:left}
+  th{background:var(--card2);color:var(--accent)}
+  code,.f{background:#0b1220;border:1px solid var(--line);border-radius:6px;padding:1px 6px;font-family:"SF Mono",Consolas,monospace;font-size:13.5px;color:#7dd3fc}
+  .f{display:inline-block;margin:2px 0;font-size:15px}
+  ul,ol{padding-left:20px;margin:8px 0}
+  li{margin:4px 0}
+  .muted{color:var(--muted)}
+  .pill{display:inline-block;background:var(--card2);border-radius:20px;padding:2px 10px;font-size:12px;color:var(--muted);margin:2px 4px 2px 0}
+  .stars{color:var(--amber)}
+  /* Exercices */
+  .exo{border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:0 0 12px;background:var(--card)}
+  .exo .q{font-size:14.5px}
+  .reveal-btn{margin-top:10px;width:100%;background:var(--accent);color:#04222e;border:none;border-radius:10px;padding:11px;font-size:15px;font-weight:700}
+  .reveal-btn:active{transform:scale(.98)}
+  .sol{display:none;margin-top:12px;padding:12px;background:#052e26;border:1px solid #065f46;border-radius:10px;font-size:14px}
+  .sol.show{display:block}
+  .sol b{color:var(--green)}
+  .res{color:var(--green);font-weight:700}
+  /* Checklist */
+  .chk{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+  .chk:last-child{border-bottom:none}
+  .chk input{width:22px;height:22px;margin-top:1px;accent-color:var(--green);flex:0 0 auto}
+  .chk label{flex:1}
+  .chk input:checked + label{color:var(--muted);text-decoration:line-through}
+  .day{font-weight:700;color:var(--amber);margin:16px 0 4px;font-size:15px}
+  /* Bottom nav */
+  nav{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;
+    background:rgba(15,23,42,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  nav button{flex:1;background:none;border:none;color:var(--muted);padding:9px 2px 8px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}
+  nav button .ic{font-size:21px;line-height:1}
+  nav button.active{color:var(--accent)}
+  .tip{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px}
+  .warn{border-left:4px solid var(--amber);background:#2a2410;padding:10px 12px;border-radius:8px;font-size:13.5px;margin:10px 0}
+  .progress{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+  details{border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;overflow:hidden}
+  summary{padding:12px 14px;font-weight:600;cursor:pointer;background:var(--card2);list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"＋";float:right;color:var(--accent)}
+  details[open] summary::after{content:"−"}
+  details .body{padding:0 14px 12px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📘 Révision BTS MEC</h1>
+  <div class="sub">Objectif <span class="jmark">10/20</span> · épreuve le <span class="jmark">23 juin 2026</span> · <span id="countdown"></span></div>
+</header>
+
+<main>
+
+<!-- ============ PLAN ============ -->
+<section id="plan" class="active">
+  <h2>🗓️ Plan 4 jours</h2>
+  <div class="why"><b>🎯 Règle d'or.</b> On privilégie les points faciles et mécaniques. Mieux vaut 6 questions faciles réussies qu'1 question dure ratée.</div>
+  <div class="card">
+    <div class="day">Jeudi 19 — Calculatrice (demi-journée)</div>
+    <div class="chk"><input type="checkbox" id="c1"><label for="c1">Faire les 4 tests calculatrice jusqu'à l'automatisme</label></div>
+    <div class="chk"><input type="checkbox" id="c2"><label for="c2">Lire les 2 fiches stratégie (maths + physique)</label></div>
+    <div class="chk"><input type="checkbox" id="c3"><label for="c3">Commencer stats / régression</label></div>
+
+    <div class="day">Vendredi 20 — Gisement de points</div>
+    <div class="chk"><input type="checkbox" id="c4"><label for="c4">Maths : stats/régression (finir)</label></div>
+    <div class="chk"><input type="checkbox" id="c5"><label for="c5">Maths : lois (normale + binomiale)</label></div>
+    <div class="chk"><input type="checkbox" id="c6"><label for="c6">Physique : thermique (ton terrain ITE)</label></div>
+
+    <div class="day">Samedi 21 — Le cœur classique</div>
+    <div class="chk"><input type="checkbox" id="c7"><label for="c7">Maths : dérivées</label></div>
+    <div class="chk"><input type="checkbox" id="c8"><label for="c8">Maths : calcul intégral</label></div>
+    <div class="chk"><input type="checkbox" id="c9"><label for="c9">Physique : statique</label></div>
+    <div class="chk"><input type="checkbox" id="c10"><label for="c10">Physique : chimie / matériaux</label></div>
+
+    <div class="day">Dimanche 22 — Conditions réelles</div>
+    <div class="chk"><input type="checkbox" id="c11"><label for="c11">Annale blanche maths (2h chrono)</label></div>
+    <div class="chk"><input type="checkbox" id="c12"><label for="c12">Annale blanche physique (2h chrono)</label></div>
+    <div class="chk"><input type="checkbox" id="c13"><label for="c13">Noter mes 5 erreurs les plus fréquentes</label></div>
+
+    <div class="day">Lundi 23 (matin) — Consolidation</div>
+    <div class="chk"><input type="checkbox" id="c14"><label for="c14">Relire le Mémo formules + Calculatrice</label></div>
+    <div class="chk"><input type="checkbox" id="c15"><label for="c15">Relire mes 5 erreurs · ZÉRO nouveauté</label></div>
+    <div class="progress" id="planProgress"></div>
+  </div>
+  <div class="card">
+    <h3>Priorité si tu manques de temps</h3>
+    <ol>
+      <li>Calculatrice (stats, régression, lois)</li>
+      <li>Thermique</li>
+      <li>Dérivée + intégrale simple</li>
+      <li>Statique (ΣF=0, ΣM=0)</li>
+      <li>Concentration / dosage</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ MEMO ============ -->
+<section id="memo">
+  <h2>📄 Mémo formules</h2>
+  <div class="why"><b>🎯</b> Si tu ne révises qu'une chose le matin du 23, c'est ça. Mode examen = tu ne peux pas l'apporter → l'avoir en tête.</div>
+
+  <h3>Maths — Stats / régression</h3>
+  <div class="card">
+    <ul>
+      <li>Moyenne x̄, écart-type σx → <code>1VAR</code></li>
+      <li>Droite y = a x + b et corrélation r → <code>REG → X</code></li>
+      <li>|r| proche de 1 (≥ 0,95) → ajustement justifié</li>
+      <li>Prévision : remplacer x dans y = a x + b</li>
+    </ul>
+  </div>
+  <h3>Maths — Lois</h3>
+  <div class="card">
+    <p><b>Binomiale</b> B(n, p) → <code>DIST → BINM</code></p>
+    <ul><li>P(X=k)=<code>Bpd</code> · P(X≤k)=<code>Bcd</code></li>
+    <li>« au moins un » = 1 − P(X=0) · E(X) = n·p</li></ul>
+    <p><b>Normale</b> N(μ, σ) → <code>DIST → NORM</code></p>
+    <ul><li>P(a≤X≤b)=<code>Ncd</code>. Borne −∞ = -1E99, +∞ = 1E99</li>
+    <li>valeur seuil → <code>InvN</code>. <b>Entrer σ, pas σ².</b></li></ul>
+  </div>
+  <h3>Maths — Dérivées</h3>
+  <div class="card">
+    <span class="f">(xⁿ)' = n·xⁿ⁻¹</span> <span class="f">(eˣ)' = eˣ</span> <span class="f">(ln x)' = 1/x</span><br>
+    <span class="f">(uv)' = u'v + uv'</span> <span class="f">(u/v)' = (u'v − uv')/v²</span><br>
+    <span class="f">(eᵘ)' = u'·eᵘ</span> <span class="f">(ln u)' = u'/u</span>
+    <p class="tip">f'>0 ↗ croît · f'<0 ↘ décroît · f'=0 (change de signe) → extremum</p>
+  </div>
+  <h3>Maths — Intégrales</h3>
+  <div class="card">
+    <span class="f">∫xⁿ = xⁿ⁺¹/(n+1)</span> <span class="f">∫eˣ = eˣ</span> <span class="f">∫1/x = ln|x|</span> <span class="f">∫e^(ax) = (1/a)e^(ax)</span>
+    <p><span class="f">∫ₐᵇ f = F(b) − F(a) = aire</span> · valeur moyenne = (1/(b−a))∫ₐᵇ f</p>
+    <p class="tip">Filet : <code>OPTN → CALC → ∫dx</code> calcule l'intégrale numériquement.</p>
+  </div>
+  <h3>Physique — Thermique <span class="muted">(e en m !)</span></h3>
+  <div class="card">
+    <span class="f">R = e/λ</span> <span class="f">R_tot = ΣR</span> <span class="f">U = 1/R_tot</span> <span class="f">Φ = U·S·ΔT</span> <span class="f">E = Φ·t</span>
+    <p class="tip">Bon isolant : λ petit, R grand, U petit.</p>
+  </div>
+  <h3>Physique — Statique</h3>
+  <div class="card">
+    <span class="f">P = m·g</span> <span class="muted">(g = 9,81 N/kg)</span> · <span class="f">M = F·d</span> <span class="muted">(d = bras de levier)</span>
+    <p>Équilibre : <b>ΣF = 0 ET ΣM = 0</b>. (Moment par rapport à un appui → trouve l'autre réaction.)</p>
+  </div>
+  <h3>Physique — Chimie</h3>
+  <div class="card">
+    <span class="f">n = m/M</span> <span class="f">c = n/V</span> <span class="muted">(V en litres !)</span> <span class="f">Cm = m/V</span><br>
+    <span class="f">pH = −log[H₃O⁺]</span> <span class="f">[H₃O⁺] = 10^(−pH)</span> <span class="muted">pH<7 acide, >7 basique</span><br>
+    <span class="f">Dosage : c_a·V_a = c_b·V_b</span>
+  </div>
+  <div class="warn"><b>Réflexe :</b> formule → remplacer par les valeurs → résultat AVEC l'unité. Convertir AVANT (cm→m, mL→L). Arrondir à la fin.</div>
+</section>
+
+<!-- ============ CALCULATRICE ============ -->
+<section id="calc">
+  <h2>🧮 Casio Graph 90+E</h2>
+  <div class="why"><b>🎯</b> La calculatrice fait la régression, l'écart-type et les probabilités à ta place : <b>4 à 6 points quasi automatiques</b>. Objectif : ces 4 manips sans réfléchir.</div>
+  <div class="warn"><b>Mode examen</b> (jour J) : verrouille la mémoire → ces manips doivent être dans ta tête. Teste l'activation AVANT le jour J.</div>
+
+  <h3>Accès</h3>
+  <div class="card"><code>MENU</code> → icône <b>STAT</b>. Pour les lois : depuis STAT, <code>DIST</code> (F5).</div>
+
+  <h3>1 · Stats 1 variable</h3>
+  <div class="card">
+    Valeurs dans <b>List1</b> → <code>CALC</code>(F2) → <code>1VAR</code>(F1).<br>
+    Lecture : x̄ (moyenne) · σx (écart-type).
+    <p class="tip">Test : 4, 6, 8, 10 → x̄ = 7 ; σx = 2,236</p>
+  </div>
+  <h3>2 · Régression y = ax + b ⭐</h3>
+  <div class="card">
+    x dans <b>List1</b>, y dans <b>List2</b> → <code>CALC</code>(F2) → <code>REG</code>(F3) → <code>X</code>(F1).<br>
+    Lecture directe : a, b, r.
+    <p class="tip">Test : 1,2,3,4 / 2,4,5,7 → a≈1,6 ; b≈0,5 ; r≈0,98</p>
+  </div>
+  <h3>3 · Loi normale</h3>
+  <div class="card">
+    <code>DIST</code>(F5) → <code>NORM</code>(F1) :<br>
+    <code>Ncd</code> = P(a≤X≤b) → Lower, Upper, σ, μ.<br>
+    <code>InvN</code> = inverse (tu donnes p, il rend x).<br>
+    Bornes : P(X≤k) → Lower = <b>-1E99</b> ; P(X≥k) → Upper = <b>1E99</b>.
+    <p class="tip">Test : μ=0, σ=1, Lower=-1E99, Upper=0 → 0,5</p>
+  </div>
+  <h3>4 · Loi binomiale</h3>
+  <div class="card">
+    <code>DIST</code>(F5) → <code>BINM</code>(F2) :<br>
+    <code>Bpd</code> = P(X=k) · <code>Bcd</code> = P(X≤k). Entrer x(=k), Numtrial(=n), p.
+    <p class="tip">Test : n=10, p=0,5, x=5, Bpd → 0,246</p>
+  </div>
+  <h3>Pièges le jour J</h3>
+  <div class="card"><ul>
+    <li>Séparateur décimal = point « . »</li>
+    <li>σx (population) vs sx (échantillon) : en BTS souvent σx</li>
+    <li>Normale : entrer σ, pas σ² (si on donne la variance, prends la racine)</li>
+    <li>Régression : ne pas inverser x et y</li>
+    <li>Garde les décimales, arrondis à la fin</li>
+  </ul></div>
+</section>
+
+<!-- ============ MATHS ============ -->
+<section id="maths">
+  <h2>➗ Maths — exercices</h2>
+  <div class="why"><b>🎯</b> Touche « Voir la correction » seulement APRÈS avoir cherché sur ta calculatrice. C'est en cherchant que ça rentre.</div>
+
+  <h3>Où sont les points</h3>
+  <details><summary>Plancher 10/20 — gestes à sécuriser</summary>
+  <div class="body"><table>
+    <tr><th>Geste</th><th>Diff.</th><th>Pts</th></tr>
+    <tr><td>Moyenne, écart-type (1VAR)</td><td class="stars">⭐</td><td>1-2</td></tr>
+    <tr><td>Droite + corrélation (REG)</td><td class="stars">⭐</td><td>3-4</td></tr>
+    <tr><td>Prévision</td><td class="stars">⭐</td><td>1-2</td></tr>
+    <tr><td>Loi normale</td><td class="stars">⭐⭐</td><td>2-3</td></tr>
+    <tr><td>Loi binomiale</td><td class="stars">⭐⭐</td><td>2-3</td></tr>
+    <tr><td>Dérivée</td><td class="stars">⭐⭐</td><td>2-3</td></tr>
+    <tr><td>Intégrale / aire</td><td class="stars">⭐⭐</td><td>2-3</td></tr>
+  </table></div></details>
+
+  <h3>A · Régression</h3>
+  <div class="exo">
+    <div class="q">Logements livrés par année (x = rang, 0 en 2020) :<br>
+    <b>x</b> : 0,1,2,3,4,5 — <b>y</b> : 12,15,19,22,26,30
+    <ol><li>x̄ et σx (1VAR)</li><li>Droite y = ax+b (10⁻²)</li><li>r (10⁻³). Justifié ?</li><li>Estimer 2026 (x=6)</li></ol></div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. <b>x̄ = 2,5</b> ; σx ≈ <b>1,71</b><br>
+      2. a ≈ 3,60 ; b ≈ 11,67 → <span class="res">y = 3,60x + 11,67</span><br>
+      3. r ≈ <b>0,999</b> → proche de 1, ajustement justifié<br>
+      4. y = 3,60×6 + 11,67 = <span class="res">≈ 33 logements</span>
+    </div>
+  </div>
+
+  <h3>B · Loi binomiale</h3>
+  <div class="exo">
+    <div class="q">4 % des pièces sont défectueuses, on en prélève 30.
+    <ol><li>Loi + paramètres ?</li><li>P(exactement 2)</li><li>P(au moins une)</li><li>Nombre moyen</li></ol></div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. <b>B(30 ; 0,04)</b> (30 épreuves identiques, 2 issues, p constant)<br>
+      2. Bpd(2 ; 30 ; 0,04) ≈ <span class="res">0,222</span><br>
+      3. 1 − Bpd(0) = 1 − 0,96³⁰ ≈ <span class="res">0,706</span><br>
+      4. E(X) = 30 × 0,04 = <span class="res">1,2 pièce</span>
+    </div>
+  </div>
+
+  <h3>C · Loi normale</h3>
+  <div class="exo">
+    <div class="q">Diamètre d'une pièce : N(μ = 50 mm ; σ = 0,4).
+    <ol><li>P(49,5 ≤ X ≤ 50,5)</li><li>P(X > 50,8)</li><li>Diamètre dépassé par 90 % (InvN)</li></ol></div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. Ncd(49,5 ; 50,5 ; 0,4 ; 50) ≈ <span class="res">0,789</span><br>
+      2. Ncd(50,8 ; 1E99 ; 0,4 ; 50) ≈ <span class="res">0,0228</span><br>
+      3. P(X≤k)=0,10 → InvN(0,10 ; 0,4 ; 50) ≈ <span class="res">49,49 mm</span>
+    </div>
+  </div>
+
+  <h3>D · Dérivées</h3>
+  <div class="exo">
+    <div class="q">1. f(x) = x³ − 3x² + 4 : f'(x), f'(x)=0, variations, extrema.<br>
+    2. g(x) = (2x − 1)·eˣ : g'(x) et son signe.</div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. f'(x) = <b>3x² − 6x = 3x(x−2)</b>, zéros x=0 et x=2.<br>
+      x<0 ↗ · 0<x<2 ↘ · x>2 ↗ → <span class="res">max en x=0 (f=4)</span>, <span class="res">min en x=2 (f=0)</span><br>
+      2. g'(x) = eˣ(2x+1). eˣ>0 → signe de (2x+1) → <span class="res">min en x = −0,5</span>
+    </div>
+  </div>
+
+  <h3>E · Intégrales</h3>
+  <div class="exo">
+    <div class="q">1. ∫₁³ (x²−2x+1) dx<br>2. Valeur moyenne de x²−2x+1 sur [1;3]<br>3. ∫₀² e^(0,5x) dx</div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. F = x³/3 − x² + x ; F(3)=3, F(1)=1/3 → <span class="res">8/3 ≈ 2,67</span><br>
+      2. (1/2)×8/3 = <span class="res">4/3 ≈ 1,33</span><br>
+      3. Primitive 2e^(0,5x) ; 2e − 2 = <span class="res">≈ 3,44</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHYSIQUE ============ -->
+<section id="phys">
+  <h2>🔬 Physique — exercices</h2>
+  <div class="why"><b>🎯</b> Toujours : <b>formule → valeurs → résultat AVEC unité</b>. Convertir les unités AVANT (cm→m, mL→L) : cause n°1 d'erreurs.</div>
+
+  <h3>A · Thermique (toiture)</h3>
+  <div class="exo">
+    <div class="q">Toiture (int.→ext.) : plâtre 1,3 cm λ=0,25 · laine 24 cm λ=0,040 · bois 2 cm λ=0,15. S=60 m², int 20°C, ext −8°C.
+    <ol><li>R de chaque couche</li><li>R_tot</li><li>U</li><li>Φ</li><li>Énergie 24h (kWh)</li><li>Couche la plus isolante ?</li></ol></div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. R = 0,052 ; 6,0 ; 0,133 m²·K/W<br>
+      2. R_tot = <b>6,185</b><br>
+      3. U = 1/6,185 = <span class="res">0,162 W/(m²·K)</span><br>
+      4. ΔT=28 ; Φ = 0,162×60×28 ≈ <span class="res">272 W</span><br>
+      5. 272×24 = 6528 Wh ≈ <span class="res">6,5 kWh</span><br>
+      6. La <b>laine</b> (R=6,0 écrase les autres : λ faible, e élevé)
+    </div>
+  </div>
+
+  <h3>B · Statique</h3>
+  <div class="exo">
+    <div class="q">Poutre 4 m, appuis A (gauche) / B (droite). Charges : 2000 N à 1 m de A, 3000 N à 3 m de A.
+    <ol><li>Poids d'une masse de 250 kg</li><li>Les 2 conditions d'équilibre</li><li>R_B (moment / A)</li><li>R_A</li></ol></div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. P = 250×9,81 = <span class="res">2452,5 N ≈ 2,45 kN</span><br>
+      2. ΣF=0 : R_A+R_B = 5000 N · ΣM/A=0 : R_B×4 − 2000×1 − 3000×3 = 0<br>
+      3. R_B×4 = 11000 → <span class="res">R_B = 2750 N</span><br>
+      4. <span class="res">R_A = 5000 − 2750 = 2250 N</span>
+    </div>
+  </div>
+
+  <h3>C · Chimie</h3>
+  <div class="exo">
+    <div class="q">1. 8 g de CaCl₂ (M=111) dans 400 mL : n puis c.<br>
+    2. [H₃O⁺] = 2,5×10⁻⁵ : pH ? acide/basique ?<br>
+    3. pH = 8,2 : [H₃O⁺] ?<br>
+    4. Dosage : 15 mL d'acide par soude 0,20 mol/L, équiv. à 18 mL : c_acide ?</div>
+    <button class="reveal-btn">Voir la correction</button>
+    <div class="sol">
+      1. n = 8/111 = 0,072 mol ; c = 0,072/0,400 = <span class="res">0,18 mol/L</span><br>
+      2. pH = −log(2,5×10⁻⁵) = <span class="res">4,6 → acide</span><br>
+      3. [H₃O⁺] = 10⁻⁸·² = <span class="res">6,3×10⁻⁹ mol/L</span> (basique)<br>
+      4. c_a×15 = 0,20×18 → <span class="res">c_a = 0,24 mol/L</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav>
+  <button data-t="plan" class="active"><span class="ic">🗓️</span>Plan</button>
+  <button data-t="memo"><span class="ic">📄</span>Mémo</button>
+  <button data-t="calc"><span class="ic">🧮</span>Casio</button>
+  <button data-t="maths"><span class="ic">➗</span>Maths</button>
+  <button data-t="phys"><span class="ic">🔬</span>Physique</button>
+</nav>
+
+<script>
+  // Navigation
+  const tabs = document.querySelectorAll('nav button');
+  const secs = document.querySelectorAll('section');
+  tabs.forEach(b=>b.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    secs.forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.t).classList.add('active');
+    window.scrollTo(0,0);
+  }));
+
+  // Reveal corrections
+  document.querySelectorAll('.reveal-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const sol = btn.nextElementSibling;
+      const open = sol.classList.toggle('show');
+      btn.textContent = open ? 'Masquer la correction' : 'Voir la correction';
+    });
+  });
+
+  // Checklist persistence + progress
+  const boxes = document.querySelectorAll('.chk input');
+  function updateProgress(){
+    const done = [...boxes].filter(b=>b.checked).length;
+    document.getElementById('planProgress').textContent = done + ' / ' + boxes.length + ' fait';
+  }
+  boxes.forEach(b=>{
+    try{ if(localStorage.getItem('bts_'+b.id)==='1') b.checked=true; }catch(e){}
+    b.addEventListener('change',()=>{
+      try{ localStorage.setItem('bts_'+b.id, b.checked?'1':'0'); }catch(e){}
+      updateProgress();
+    });
+  });
+  updateProgress();
+
+  // Countdown to 23 June 2026
+  (function(){
+    const exam = new Date(2026,5,23,8,0,0);
+    const now = new Date();
+    const days = Math.ceil((exam-now)/86400000);
+    const el = document.getElementById('countdown');
+    el.textContent = days>0 ? ('J−'+days) : (days===0?"Jour J 💪":"épreuve passée");
+  })();
+</script>
+</body>
+</html>
