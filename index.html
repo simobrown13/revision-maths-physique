@@ -102,6 +102,17 @@
   .subbtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
   .subbtns button{flex:1;background:#273449;color:#cbd5e1;border:1px solid #475569;border-radius:8px;padding:9px 4px;font-size:13px;font-weight:600;min-width:60px}
   .subbtns button.on{background:#fbbf24;color:#3a2c00;border-color:#fbbf24}
+  /* ---- Notes pédagogiques ---- */
+  details.learn{border-color:#065f46}
+  details.learn summary{background:#0e2a22;color:#6ee7b7}
+  details.learn summary::after{color:#6ee7b7}
+  details.learn .body{padding:10px 14px 14px;font-size:14.5px;line-height:1.55}
+  details.learn .body p{margin:8px 0}
+  details.learn .body b{color:#fff}
+  .analogy{border-left:3px solid var(--accent);padding:8px 11px;margin:10px 0;font-size:14px;color:#cbd5e1;background:#0e2030;border-radius:0 8px 8px 0}
+  .analogy::before{content:"🔎 Image : ";color:var(--accent);font-weight:700}
+  .keyidea{background:#0b1220;border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin:8px 0;font-size:13.5px}
+  .enclair{font-size:13px;color:var(--green);font-style:italic;margin:4px 0 0}
 </style>
 </head>
 <body>
@@ -337,6 +348,15 @@
   </table></div></details>
 
   <h3>A · Régression</h3>
+  <details class="learn" open><summary>💡 Comprendre la régression</summary><div class="body">
+    <p>On te donne un <b>nuage de points</b> (ex : chaque point = une année et son prix). La régression, c'est tracer <b>la droite qui passe le mieux au milieu</b> de ces points — comme poser une règle pour suivre la tendance générale.</p>
+    <p>Cette droite s'écrit <b>y = a x + b</b> :</p>
+    <div class="keyidea"><b>a</b> = la <b>pente</b> : de combien y change quand x augmente de 1. Si a = 7,9 → +7,9 par an. <b>a négatif → ça descend.</b><br>
+    <b>b</b> = la valeur de y au <b>départ</b> (quand x = 0).</div>
+    <p><b>r (coefficient de corrélation)</b> = une <b>note de qualité</b> entre −1 et 1. Plus |r| est proche de 1, plus les points sont alignés et plus la droite est fiable. Proche de 0 = nuage dispersé.</p>
+    <div class="analogy">estimer le prix d'une voiture d'occasion selon son âge — plus elle est vieille, moins elle vaut. La droite résume cette tendance et te permet de <b>prévoir</b> un prix.</div>
+    <p class="enclair">À l'examen : la calculatrice fait TOUT (STAT → REG). Toi tu lis a, b, r et tu écris la phrase de conclusion sur r.</p>
+  </div></details>
   <div class="exo">
     <div class="q">Logements livrés par année (x = rang, 0 en 2020) :<br>
     <b>x</b> : 0,1,2,3,4,5 — <b>y</b> : 12,15,19,22,26,30
@@ -351,6 +371,17 @@
   </div>
 
   <h3>B · Loi binomiale</h3>
+  <details class="learn" open><summary>💡 Comprendre : binomiale ou normale ?</summary><div class="body">
+    <p>Deux lois reviennent tout le temps. Le vrai travail = <b>reconnaître laquelle</b> :</p>
+    <div class="keyidea"><b>Binomiale</b> B(n, p) = je <b>COMPTE des succès</b> en répétant n fois une épreuve à 2 issues (réussi/raté, défectueux/bon).<br>
+    <span class="muted">Mots-clés : « on prélève n pièces… chacune a une probabilité p d'être défectueuse… combien parmi… »</span></div>
+    <div class="analogy">lancer une pièce 10 fois et compter le nombre de « face ». On compte des succès parmi des essais → binomiale.</div>
+    <div class="keyidea"><b>Normale</b> N(μ, σ) = une grandeur qui se <b>MESURE</b> et varie autour d'une moyenne (longueur, masse, durée, résistance). Courbe en cloche.<br>
+    <span class="muted">Mots-clés : « suit une loi normale de moyenne μ et d'écart-type σ ».</span></div>
+    <div class="analogy">la taille des élèves d'une classe : la plupart proches de la moyenne, peu de très grands ou très petits → courbe en cloche → normale.</div>
+    <p><b>Astuce qui rapporte :</b> « au moins un » = 1 − P(aucun) = 1 − P(X = 0). Bien plus rapide que tout additionner.</p>
+    <p class="enclair">Espérance E(X) = n·p = le nombre moyen de succès attendu.</p>
+  </div></details>
   <div class="exo">
     <div class="q">4 % des pièces sont défectueuses, on en prélève 30.
     <ol><li>Loi + paramètres ?</li><li>P(exactement 2)</li><li>P(au moins une)</li><li>Nombre moyen</li></ol></div>
@@ -364,6 +395,14 @@
   </div>
 
   <h3>C · Loi normale</h3>
+  <details class="learn" open><summary>💡 Bien lire la loi normale</summary><div class="body">
+    <p><b>σ (écart-type)</b> mesure l'étalement de la cloche : petit σ = cloche serrée (valeurs proches de la moyenne) ; grand σ = cloche large (valeurs très dispersées).</p>
+    <div class="keyidea"><b>Ncd</b> = « quelle proportion (probabilité) tombe entre a et b ? » → c'est l'<b>aire sous la cloche</b> entre a et b.<br>
+    <b>InvN</b> = le calcul <b>inverse</b> : « à partir de quel seuil k a-t-on telle proportion ? »</div>
+    <div class="analogy">tu remplis une proportion de la cloche avec de la peinture : Ncd te donne la surface peinte entre deux bords, InvN te dit où mettre le bord pour peindre exactement X %.</div>
+    <p>⚠️ On entre <b>σ</b> (l'écart-type), <b>pas σ²</b> (la variance). Si l'énoncé donne la variance, prends d'abord sa racine carrée.</p>
+    <p class="enclair">Bornes infinies : P(X ≤ k) → Lower = -1E99 · P(X ≥ k) → Upper = 1E99.</p>
+  </div></details>
   <div class="exo">
     <div class="q">Diamètre d'une pièce : N(μ = 50 mm ; σ = 0,4).
     <ol><li>P(49,5 ≤ X ≤ 50,5)</li><li>P(X > 50,8)</li><li>Diamètre dépassé par 90 % (InvN)</li></ol></div>
@@ -376,6 +415,13 @@
   </div>
 
   <h3>D · Dérivées</h3>
+  <details class="learn" open><summary>💡 Comprendre la dérivée</summary><div class="body">
+    <p>La dérivée <b>f'(x)</b>, c'est la <b>pente de la courbe</b> en chaque point : est-ce que ça monte, ça descend, et à quelle vitesse.</p>
+    <div class="keyidea"><b>f' &gt; 0</b> → la fonction <b>monte ↗</b><br><b>f' &lt; 0</b> → elle <b>descend ↘</b><br><b>f' = 0</b> → palier : <b>sommet (max)</b> ou <b>creux (min)</b></div>
+    <div class="analogy">la dérivée, c'est comme la <b>vitesse</b> d'une voiture. Vitesse positive → tu avances (la position monte) ; à l'instant où tu fais demi-tour, ta vitesse passe par 0 → c'est ton point le plus éloigné (un extremum).</div>
+    <p><b>À quoi ça sert :</b> trouver le <b>maximum ou le minimum</b> d'une fonction (le point le plus haut / le plus bas) → c'est là où f'(x) = 0 en changeant de signe.</p>
+    <p class="enclair">Pour calculer f'(x) : on applique les formules du Mémo — (xⁿ)' = n·xⁿ⁻¹, (eˣ)' = eˣ, produit (uv)' = u'v + uv'…</p>
+  </div></details>
   <div class="exo">
     <div class="q">1. f(x) = x³ − 3x² + 4 : f'(x), f'(x)=0, variations, extrema.<br>
     2. g(x) = (2x − 1)·eˣ : g'(x) et son signe.</div>
@@ -388,6 +434,13 @@
   </div>
 
   <h3>E · Intégrales</h3>
+  <details class="learn" open><summary>💡 Comprendre l'intégrale</summary><div class="body">
+    <p>L'intégrale <b>∫ₐᵇ f</b>, c'est l'<b>aire sous la courbe</b> entre a et b (la surface entre la courbe et l'axe horizontal).</p>
+    <div class="keyidea">On la calcule avec une <b>primitive F</b> = l'opération <b>inverse de la dérivée</b> (si F' = f, alors F est une primitive de f).<br>Résultat = <b>F(b) − F(a)</b>.</div>
+    <div class="analogy">l'intégrale, c'est <b>cumuler</b>. Si f est la vitesse, l'aire sous la courbe = la <b>distance</b> parcourue. Si f est un débit d'eau, l'aire = le <b>volume</b> qui a rempli la cuve.</div>
+    <p><b>Valeur moyenne</b> sur [a, b] = l'aire « étalée » uniformément = (1/(b−a)) × ∫ₐᵇ f. C'est la hauteur moyenne de la courbe.</p>
+    <p class="enclair">Filet de sécurité : même si tu rates la primitive, la calculette (onglet Casio) calcule l'intégrale → tu gardes les points du résultat.</p>
+  </div></details>
   <div class="exo">
     <div class="q">1. ∫₁³ (x²−2x+1) dx<br>2. Valeur moyenne de x²−2x+1 sur [1;3]<br>3. ∫₀² e^(0,5x) dx</div>
     <button class="reveal-btn">Voir la correction</button>
@@ -405,6 +458,16 @@
   <div class="why"><b>🎯</b> Toujours : <b>formule → valeurs → résultat AVEC unité</b>. Convertir les unités AVANT (cm→m, mL→L) : cause n°1 d'erreurs.</div>
 
   <h3>A · Thermique (toiture)</h3>
+  <details class="learn" open><summary>💡 Comprendre la thermique</summary><div class="body">
+    <p>La chaleur s'échappe toujours du <b>chaud vers le froid</b> (de l'intérieur chauffé vers l'extérieur). L'isolation sert à <b>freiner</b> cette fuite.</p>
+    <div class="keyidea"><b>λ (lambda)</b> = à quel point un matériau <b>laisse passer</b> la chaleur. <b>Petit λ = bon isolant</b> (laine) ; grand λ = mauvais (béton, métal).<br>
+    <b>R = e/λ</b> = la <b>résistance</b> : capacité à freiner la chaleur. Plus c'est <b>épais (e)</b> et isolant (λ petit), plus R est grand.<br>
+    <b>U = 1/R_tot</b> = l'inverse : la facilité à laisser passer. <b>Petit U = bonne isolation.</b><br>
+    <b>Φ = U·S·ΔT</b> = la chaleur qui s'échappe chaque seconde (watts).</div>
+    <div class="analogy">R, c'est l'épaisseur d'un <b>manteau</b> : plus il est épais, moins tu as froid. Et plus il fait froid dehors (ΔT grand) ou plus le mur est grand (S grand), plus la maison perd vite sa chaleur.</div>
+    <p><b>L'enchaînement à reproduire :</b> e, λ → R de chaque couche → R_tot (on additionne) → U = 1/R_tot → Φ = U·S·ΔT → énergie sur la durée (E = Φ·t).</p>
+    <p class="enclair">⚠️ Toujours convertir les épaisseurs en <b>mètres</b> avant de calculer (cm → m). C'est l'erreur n°1.</p>
+  </div></details>
   <div class="exo">
     <div class="q">Toiture (int.→ext.) : plâtre 1,3 cm λ=0,25 · laine 24 cm λ=0,040 · bois 2 cm λ=0,15. S=60 m², int 20°C, ext −8°C.
     <ol><li>R de chaque couche</li><li>R_tot</li><li>U</li><li>Φ</li><li>Énergie 24h (kWh)</li><li>Couche la plus isolante ?</li></ol></div>
@@ -420,6 +483,15 @@
   </div>
 
   <h3>B · Statique</h3>
+  <details class="learn" open><summary>💡 Comprendre la statique</summary><div class="body">
+    <p>« Statique » = <b>rien ne bouge</b>. On étudie des structures à l'équilibre (ex : une poutre posée sur deux appuis).</p>
+    <div class="keyidea"><b>Force</b> = une action (poids, poussée), en newtons (N). <b>Poids P = m·g</b> (g ≈ 9,81) → une masse de 100 kg pèse ≈ 981 N.<br>
+    <b>Moment M = F·d</b> = l'<b>effet de rotation</b> d'une force. d = distance entre la force et le pivot (bras de levier).</div>
+    <div class="analogy">pour ouvrir une porte, tu pousses <b>loin des gonds</b> (grand d) : c'est facile. Près des gonds (petit d), il faut forcer. Même force, mais effet de rotation différent → c'est le moment.</div>
+    <div class="keyidea"><b>Équilibre = 2 conditions :</b><br>① <b>ΣF = 0</b> : ce qui pousse vers le haut compense le bas.<br>② <b>ΣM = 0</b> : ce qui fait tourner d'un côté compense l'autre.</div>
+    <div class="analogy">une <b>balançoire</b> : si quelqu'un s'assoit plus près d'un bout, ce bout porte plus de poids. L'appui le plus proche de la charge supporte le plus.</div>
+    <p class="enclair">Astuce qui rapporte : prends les moments <b>par rapport à un appui</b> → son bras de levier est nul, sa réaction disparaît, et tu trouves l'autre directement.</p>
+  </div></details>
   <div class="exo">
     <div class="q">Poutre 4 m, appuis A (gauche) / B (droite). Charges : 2000 N à 1 m de A, 3000 N à 3 m de A.
     <ol><li>Poids d'une masse de 250 kg</li><li>Les 2 conditions d'équilibre</li><li>R_B (moment / A)</li><li>R_A</li></ol></div>
@@ -433,6 +505,15 @@
   </div>
 
   <h3>C · Chimie</h3>
+  <details class="learn" open><summary>💡 Comprendre la chimie</summary><div class="body">
+    <div class="keyidea"><b>Mole (mol)</b> = une façon de <b>compter</b> les atomes/molécules par paquets (comme « une douzaine » = 12). <b>n = m/M</b> : la masse ÷ la masse molaire = le nombre de paquets.</div>
+    <div class="keyidea"><b>Concentration c = n/V</b> = combien de matière dans un volume. ⚠️ V en <b>litres</b> (250 mL = 0,250 L).</div>
+    <div class="analogy">la concentration, c'est comme du <b>sirop dans l'eau</b> : plus c'est concentré, plus il y a de sirop par litre.</div>
+    <div class="keyidea"><b>pH</b> = l'échelle d'<b>acidité</b>, de 0 à 14. <b>&lt; 7 acide</b> (citron, vinaigre) · <b>7 neutre</b> (eau pure) · <b>&gt; 7 basique</b> (savon). pH = −log[H₃O⁺].</div>
+    <div class="analogy">chaque unité de pH = un facteur <b>×10</b> : un pH de 3 est 10 fois plus acide qu'un pH de 4, et 100 fois plus qu'un pH de 5.</div>
+    <div class="keyidea"><b>Dosage</b> : on verse une solution connue dans l'inconnue jusqu'à l'<b>équivalence</b> (le moment exact où les deux se neutralisent). À ce point : <b>c_a·V_a = c_b·V_b</b> → on en déduit la concentration inconnue.</div>
+    <p class="enclair">L'équivalence = ni trop, ni trop peu : pile la quantité pour tout neutraliser.</p>
+  </div></details>
   <div class="exo">
     <div class="q">1. 8 g de CaCl₂ (M=111) dans 400 mL : n puis c.<br>
     2. [H₃O⁺] = 2,5×10⁻⁵ : pH ? acide/basique ?<br>
