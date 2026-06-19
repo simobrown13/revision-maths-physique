@@ -78,6 +78,30 @@
   summary::after{content:"＋";float:right;color:var(--accent)}
   details[open] summary::after{content:"−"}
   details .body{padding:0 14px 12px}
+  /* ---- Calculette ---- */
+  .calc{background:#0b1220;border:2px solid #475569;border-radius:16px;padding:12px;margin:0 0 16px}
+  .calc .screen{background:#bfe3c6;color:#0c2718;border-radius:8px;padding:10px 12px;min-height:64px;font-family:"SF Mono",Consolas,monospace;font-size:19px;text-align:right;word-break:break-all;border:1px solid #2d4a35;display:flex;flex-direction:column;justify-content:flex-end}
+  .calc .screen .small{font-size:12px;color:#2f5a3c;min-height:15px;font-weight:600}
+  .calc .screen .main{font-size:21px;font-weight:700}
+  .calc .modes{display:flex;gap:6px;margin:10px 0}
+  .calc .modes button{flex:1;background:#1e293b;color:#cbd5e1;border:1px solid #475569;border-radius:8px;padding:9px 2px;font-size:12px;font-weight:700}
+  .calc .modes button.on{background:#38bdf8;color:#04222e;border-color:#38bdf8}
+  .calc .pane{display:none}.calc .pane.on{display:block}
+  .keys{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:10px}
+  .keys button{background:#1e293b;color:#e2e8f0;border:1px solid #475569;border-radius:10px;padding:14px 0;font-size:16px;font-weight:600}
+  .keys button:active{background:#334155;transform:scale(.96)}
+  .keys .op{color:#fbbf24}.keys .fn{color:#7dd3fc;font-size:13.5px}
+  .keys .eq{background:#34d399;color:#04261b}.keys .ac{background:#f87171;color:#2a0a0a}
+  .calc label{font-size:12px;color:#94a3b8;display:block;margin:9px 0 3px}
+  .calc input[type=text]{width:100%;background:#0b1220;color:#e2e8f0;border:1px solid #475569;border-radius:8px;padding:10px;font-size:15px;font-family:"SF Mono",Consolas,monospace}
+  .calc .go{width:100%;background:#38bdf8;color:#04222e;border:none;border-radius:10px;padding:12px;font-weight:700;font-size:15px;margin-top:10px}
+  .calc .go:active{transform:scale(.98)}
+  .calc .out{margin-top:10px;background:#052e26;border:1px solid #065f46;border-radius:8px;padding:11px;font-size:14px;color:#a7f3d0;white-space:pre-wrap;min-height:20px;font-family:"SF Mono",Consolas,monospace}
+  .calc .out.err{background:#3a0d0d;border-color:#7f1d1d;color:#fca5a5}
+  .calc .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .subbtns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+  .subbtns button{flex:1;background:#273449;color:#cbd5e1;border:1px solid #475569;border-radius:8px;padding:9px 4px;font-size:13px;font-weight:600;min-width:60px}
+  .subbtns button.on{background:#fbbf24;color:#3a2c00;border-color:#fbbf24}
 </style>
 </head>
 <body>
@@ -191,6 +215,69 @@
   <h2>🧮 Casio Graph 90+E</h2>
   <div class="why"><b>🎯</b> La calculatrice fait la régression, l'écart-type et les probabilités à ta place : <b>4 à 6 points quasi automatiques</b>. Objectif : ces 4 manips sans réfléchir.</div>
   <div class="warn"><b>Mode examen</b> (jour J) : verrouille la mémoire → ces manips doivent être dans ta tête. Teste l'activation AVANT le jour J.</div>
+
+  <h3>📱 Calculette façon Casio</h3>
+  <p class="tip">Réplique <b>fonctionnelle</b> (pas le firmware Casio) : mêmes menus STAT / DIST, + dérivée &amp; intégrale. Entraîne-toi aux gestes ici, exécute-les sur ta vraie Casio le jour J.</p>
+  <div class="calc">
+    <div class="screen"><span class="small" id="sc-small">&nbsp;</span><span class="main" id="sc-main">0</span></div>
+    <div class="modes">
+      <button data-m="run" class="on">RUN</button>
+      <button data-m="stat">STAT</button>
+      <button data-m="dist">DIST</button>
+      <button data-m="cal">d/dx ∫</button>
+    </div>
+
+    <!-- RUN -->
+    <div class="pane on" id="p-run">
+      <div class="subbtns"><button id="degbtn" class="on">Deg</button><button id="radbtn">Rad</button></div>
+      <div class="keys">
+        <button class="fn" data-k="sin(">sin</button><button class="fn" data-k="cos(">cos</button><button class="fn" data-k="tan(">tan</button><button class="fn" data-k="^">xⁿ</button><button class="fn" data-k="√(">√</button>
+        <button class="fn" data-k="ln(">ln</button><button class="fn" data-k="log(">log</button><button class="fn" data-k="exp(">eˣ</button><button class="op" data-k="(">(</button><button class="op" data-k=")">)</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="×">×</button><button class="op" data-k="÷">÷</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="+">+</button><button class="op" data-k="−">−</button>
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="fn" data-k="π">π</button><button class="ac" id="k-ac">AC</button>
+        <button data-k="0">0</button><button data-k=".">.</button><button data-k="E">EXP</button><button id="k-del">DEL</button><button class="eq" id="k-eq">=</button>
+      </div>
+      <p class="tip">EXP = ×10ˣ (tape <code>1 EXP 99</code> pour 1E99). Multiplication implicite OK : <code>4x</code>, <code>2(3+1)</code>.</p>
+    </div>
+
+    <!-- STAT -->
+    <div class="pane" id="p-stat">
+      <label>List 1 (x) — valeurs séparées par espace ou ,</label>
+      <input type="text" id="l1" placeholder="ex : 0 1 2 3 4 5">
+      <label>List 2 (y) — pour la régression</label>
+      <input type="text" id="l2" placeholder="ex : 12 15 19 22 26 30">
+      <div class="row2"><button class="go" id="b1var">1VAR</button><button class="go" id="breg">REG y=ax+b</button></div>
+      <div class="out" id="statout">Résultats ici…</div>
+    </div>
+
+    <!-- DIST -->
+    <div class="pane" id="p-dist">
+      <div class="subbtns">
+        <button class="on" data-d="ncd">Ncd</button><button data-d="invn">InvN</button>
+        <button data-d="bpd">Bpd</button><button data-d="bcd">Bcd</button>
+      </div>
+      <div id="distfields"></div>
+      <button class="go" id="bdist">Calculer</button>
+      <div class="out" id="distout">Résultat ici…</div>
+    </div>
+
+    <!-- CALC d/dx ∫ -->
+    <div class="pane" id="p-cal">
+      <label>f(x) =</label>
+      <input type="text" id="fx" placeholder="ex : x^2-4x+5  ou  exp(0.5x)">
+      <div class="row2">
+        <div><label>Dérivée en x =</label><input type="text" id="dpt" placeholder="2"></div>
+        <div style="display:flex;align-items:flex-end"><button class="go" id="bder" style="margin-top:0">f '(x)</button></div>
+      </div>
+      <div class="row2">
+        <div><label>∫ de a =</label><input type="text" id="ia" placeholder="0"></div>
+        <div><label>à b =</label><input type="text" id="ib" placeholder="2"></div>
+      </div>
+      <button class="go" id="bint">Calculer ∫</button>
+      <div class="out" id="calout">Résultat ici…</div>
+    </div>
+  </div>
 
   <h3>Accès</h3>
   <div class="card"><code>MENU</code> → icône <b>STAT</b>. Pour les lois : depuis STAT, <code>DIST</code> (F5).</div>
@@ -415,6 +502,148 @@
     const el = document.getElementById('countdown');
     el.textContent = days>0 ? ('J−'+days) : (days===0?"Jour J 💪":"épreuve passée");
   })();
+</script>
+
+<script>
+/* ===================== MOTEUR CALCULETTE ===================== */
+// --- fonctions mathématiques ---
+function erf(x){const s=x<0?-1:1;x=Math.abs(x);const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;const t=1/(1+p*x);const y=1-(((((a5*t+a4)*t)+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);return s*y;}
+const Phi=z=>0.5*(1+erf(z/Math.SQRT2));
+const Ncd=(lo,hi,sig,mu)=>Phi((hi-mu)/sig)-Phi((lo-mu)/sig);
+function invNorm(p){if(p<=0)return -Infinity;if(p>=1)return Infinity;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  const pl=0.02425,ph=1-pl;let q,r;
+  if(p<pl){q=Math.sqrt(-2*Math.log(p));return(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+  if(p<=ph){q=p-0.5;r=q*q;return(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);}
+  q=Math.sqrt(-2*Math.log(1-p));return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);}
+const InvN=(area,sig,mu)=>mu+sig*invNorm(area);
+function lgamma(z){const g=7,c=[0.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];if(z<0.5)return Math.log(Math.PI/Math.sin(Math.PI*z))-lgamma(1-z);z-=1;let x=c[0];for(let i=1;i<g+2;i++)x+=c[i]/(z+i);const t=z+g+0.5;return 0.5*Math.log(2*Math.PI)+(z+0.5)*Math.log(t)-t+Math.log(x);}
+const logC=(n,k)=>lgamma(n+1)-lgamma(k+1)-lgamma(n-k+1);
+const Bpd=(x,n,p)=>Math.exp(logC(n,x)+x*Math.log(p)+(n-x)*Math.log(1-p));
+function Bcd(x,n,p){let s=0;for(let k=0;k<=x;k++)s+=Bpd(k,n,p);return s;}
+function integ(f,a,b){let N=1000;if(N%2)N++;const h=(b-a)/N;let s=f(a)+f(b);for(let i=1;i<N;i++)s+=(i%2?4:2)*f(a+i*h);return s*h/3;}
+const deriv=(f,a)=>{const h=1e-5;return(f(a+h)-f(a-h))/(2*h);};
+
+// --- parseur d'expression ---
+let DEG=true;
+function tokenize(s){
+  s=s.replace(/×/g,'*').replace(/÷/g,'/').replace(/−/g,'-').replace(/√/g,'sqrt').replace(/π/g,'pi').replace(/,/g,'.');
+  const t=[];let i=0;const fns=['sin','cos','tan','asin','acos','atan','ln','log','exp','sqrt','abs'];
+  while(i<s.length){const c=s[i];
+    if(c===' '){i++;continue;}
+    if(/[0-9.]/.test(c)){let j=i+1;while(j<s.length&&/[0-9.]/.test(s[j]))j++;
+      if(s[j]==='E'||s[j]==='e'){let k=j+1;if(s[k]==='+'||s[k]==='-')k++;while(k<s.length&&/[0-9]/.test(s[k]))k++;t.push({t:'num',v:parseFloat(s.slice(i,k))});i=k;continue;}
+      t.push({t:'num',v:parseFloat(s.slice(i,j))});i=j;continue;}
+    if(/[a-zA-Z]/.test(c)){let j=i+1;while(j<s.length&&/[a-zA-Z]/.test(s[j]))j++;const w=s.slice(i,j);
+      if(fns.includes(w))t.push({t:'fn',v:w});
+      else if(w==='pi')t.push({t:'num',v:Math.PI});
+      else if(w==='x')t.push({t:'x'});
+      else throw 'Inconnu : '+w;
+      i=j;continue;}
+    if('+-*/^()'.includes(c)){t.push({t:c});i++;continue;}
+    throw 'Caractère : '+c;
+  }
+  // multiplication implicite
+  const o=[];for(let k=0;k<t.length;k++){o.push(t[k]);const a=t[k],b=t[k+1];if(!b)continue;
+    const aEnd=(a.t==='num'||a.t==='x'||a.t===')');
+    const bStart=(b.t==='num'||b.t==='x'||b.t==='('||b.t==='fn');
+    if(aEnd&&bStart)o.push({t:'*'});}
+  return o;
+}
+function evalExpr(expr,xval){
+  const tk=tokenize(expr);let pos=0;
+  const peek=()=>tk[pos],next=()=>tk[pos++];
+  function pExpr(){let v=pTerm();while(peek()&&(peek().t==='+'||peek().t==='-')){const op=next().t;const r=pTerm();v=op==='+'?v+r:v-r;}return v;}
+  function pTerm(){let v=pUn();while(peek()&&(peek().t==='*'||peek().t==='/')){const op=next().t;const r=pUn();v=op==='*'?v*r:v/r;}return v;}
+  function pUn(){if(peek()&&peek().t==='-'){next();return -pUn();}if(peek()&&peek().t==='+'){next();return pUn();}return pPow();}
+  function pPow(){let v=pAtom();if(peek()&&peek().t==='^'){next();const r=pUn();return Math.pow(v,r);}return v;}
+  function pAtom(){const tok=peek();if(!tok)throw 'Expression incomplète';
+    if(tok.t==='num'){next();return tok.v;}
+    if(tok.t==='x'){next();return xval;}
+    if(tok.t==='('){next();const v=pExpr();if(!peek()||peek().t!==')')throw 'Parenthèse manquante';next();return v;}
+    if(tok.t==='fn'){next();if(!peek()||peek().t!=='(')throw 'Manque ( après '+tok.v;next();const a=pExpr();if(!peek()||peek().t!==')')throw 'Parenthèse manquante';next();return fn(tok.v,a);}
+    throw 'Erreur de syntaxe';}
+  function fn(f,a){const D=DEG?Math.PI/180:1;switch(f){
+    case 'sin':return Math.sin(a*D);case 'cos':return Math.cos(a*D);case 'tan':return Math.tan(a*D);
+    case 'asin':return Math.asin(a)/D;case 'acos':return Math.acos(a)/D;case 'atan':return Math.atan(a)/D;
+    case 'ln':return Math.log(a);case 'log':return Math.log10(a);case 'exp':return Math.exp(a);
+    case 'sqrt':return Math.sqrt(a);case 'abs':return Math.abs(a);}}
+  const r=pExpr();if(pos<tk.length)throw 'Erreur de syntaxe';return r;
+}
+function fmt(x){if(!isFinite(x))return 'Math ERROR';if(x===0)return '0';
+  const ax=Math.abs(x);if(ax>=1e10||ax<1e-9)return x.toExponential(6).replace('e','×10^');
+  return String(parseFloat(x.toPrecision(10)));}
+function parseList(s){return s.trim().split(/[\s,;]+/).filter(v=>v!=='').map(Number).filter(v=>!isNaN(v));}
+
+/* ===================== UI ===================== */
+const $=id=>document.getElementById(id);
+// modes
+document.querySelectorAll('.calc .modes button').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.calc .modes button').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.calc .pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');$('p-'+btn.dataset.m).classList.add('on');
+}));
+// RUN
+let expr='';
+function showRun(){$('sc-main').textContent=expr||'0';}
+document.querySelectorAll('#p-run .keys button[data-k]').forEach(b=>b.addEventListener('click',()=>{expr+=b.dataset.k;showRun();}));
+$('k-del').addEventListener('click',()=>{expr=expr.slice(0,-1);showRun();});
+$('k-ac').addEventListener('click',()=>{expr='';$('sc-small').innerHTML='&nbsp;';showRun();});
+$('k-eq').addEventListener('click',()=>{if(!expr)return;try{const r=evalExpr(expr);$('sc-small').textContent=expr;$('sc-main').textContent=fmt(r);expr=fmt(r).replace('×10^','E');}catch(e){$('sc-small').textContent=expr;$('sc-main').textContent='ERREUR';expr='';}});
+$('degbtn').addEventListener('click',()=>{DEG=true;$('degbtn').classList.add('on');$('radbtn').classList.remove('on');});
+$('radbtn').addEventListener('click',()=>{DEG=false;$('radbtn').classList.add('on');$('degbtn').classList.remove('on');});
+// STAT
+$('b1var').addEventListener('click',()=>{const a=parseList($('l1').value);const o=$('statout');
+  if(a.length<2){o.textContent='Entre au moins 2 valeurs dans List 1.';return;}
+  const n=a.length,mean=a.reduce((s,v)=>s+v,0)/n,v=a.reduce((s,x)=>s+(x-mean)**2,0);
+  const sx=Math.sqrt(v/n),sxs=Math.sqrt(v/(n-1));const so=[...a].sort((p,q)=>p-q);
+  const med=n%2?so[(n-1)/2]:(so[n/2-1]+so[n/2])/2;
+  o.classList.remove('err');
+  o.textContent=`n = ${n}\nx̄  = ${fmt(mean)}\nσx = ${fmt(sx)}   (population)\nsx = ${fmt(sxs)}   (échantillon)\nΣx = ${fmt(a.reduce((s,x)=>s+x,0))}\nmin=${fmt(so[0])}  max=${fmt(so[n-1])}  méd=${fmt(med)}`;});
+$('breg').addEventListener('click',()=>{const xs=parseList($('l1').value),ys=parseList($('l2').value);const o=$('statout');
+  if(xs.length<2||xs.length!==ys.length){o.classList.add('err');o.textContent='List 1 et List 2 doivent avoir le MÊME nombre de valeurs (≥2).';return;}
+  const n=xs.length,mx=xs.reduce((s,v)=>s+v,0)/n,my=ys.reduce((s,v)=>s+v,0)/n;
+  let sxx=0,syy=0,sxy=0;for(let i=0;i<n;i++){sxx+=(xs[i]-mx)**2;syy+=(ys[i]-my)**2;sxy+=(xs[i]-mx)*(ys[i]-my);}
+  const a=sxy/sxx,b=my-a*mx,r=sxy/Math.sqrt(sxx*syy);o.classList.remove('err');
+  o.textContent=`Droite :  y = ${fmt(a)} x + ${fmt(b)}\na = ${fmt(a)}\nb = ${fmt(b)}\nr = ${fmt(r)}\n${Math.abs(r)>=0.95?'|r|≥0,95 → ajustement justifié ✔':'|r| < 0,95 → ajustement moins fiable'}`;});
+// DIST
+const distDefs={
+  ncd:{label:'Ncd — P(a ≤ X ≤ b)',f:['Lower (a)','Upper (b)','σ (écart-type)','μ (moyenne)'],ph:['-1E99','301','0.5','300']},
+  invn:{label:'InvN — k tel que P(X ≤ k)=aire',f:['Aire (à gauche)','σ','μ'],ph:['0.10','0.4','50']},
+  bpd:{label:'Bpd — P(X = k)',f:['k (valeur)','n (épreuves)','p'],ph:['2','30','0.04']},
+  bcd:{label:'Bcd — P(X ≤ k)',f:['k (valeur)','n (épreuves)','p'],ph:['2','30','0.04']}
+};
+let distMode='ncd';
+function renderDist(){const d=distDefs[distMode];let h='<p class="tip" style="margin-top:2px">'+d.label+'</p>';
+  d.f.forEach((lab,i)=>{h+=`<label>${lab}</label><input type="text" id="df${i}" placeholder="${d.ph[i]}">`;});
+  $('distfields').innerHTML=h;$('distout').textContent='Résultat ici…';$('distout').classList.remove('err');}
+document.querySelectorAll('#p-dist .subbtns button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#p-dist .subbtns button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');distMode=b.dataset.d;renderDist();}));
+renderDist();
+$('bdist').addEventListener('click',()=>{const o=$('distout');try{
+  const val=i=>{const t=$('df'+i).value.trim().replace(',','.');if(t==='')throw 'Champ vide';return evalExpr(t);};
+  let res,txt;
+  if(distMode==='ncd'){res=Ncd(val(0),val(1),val(2),val(3));txt='P = '+fmt(res);}
+  else if(distMode==='invn'){res=InvN(val(0),val(1),val(2));txt='k = '+fmt(res);}
+  else if(distMode==='bpd'){res=Bpd(val(0),val(1),val(2));txt='P(X='+fmt(val(0))+') = '+fmt(res);}
+  else{res=Bcd(val(0),val(1),val(2));txt='P(X≤'+fmt(val(0))+') = '+fmt(res);}
+  o.classList.remove('err');o.textContent=txt;
+}catch(e){o.classList.add('err');o.textContent='Erreur : '+e;}});
+// CALC d/dx ∫
+$('bder').addEventListener('click',()=>{const o=$('calout');try{
+  const fexpr=$('fx').value;const a=evalExpr($('dpt').value.replace(',','.'));
+  const f=x=>evalExpr(fexpr,x);const r=deriv(f,a);
+  o.classList.remove('err');o.textContent=`f '(${fmt(a)}) ≈ ${fmt(r)}`;
+}catch(e){o.classList.add('err');o.textContent='Erreur : '+e;}});
+$('bint').addEventListener('click',()=>{const o=$('calout');try{
+  const fexpr=$('fx').value;const a=evalExpr($('ia').value.replace(',','.')),b=evalExpr($('ib').value.replace(',','.'));
+  const f=x=>evalExpr(fexpr,x);const r=integ(f,a,b);
+  o.classList.remove('err');o.textContent=`∫ de ${fmt(a)} à ${fmt(b)} ≈ ${fmt(r)}\nValeur moyenne ≈ ${fmt(r/(b-a))}`;
+}catch(e){o.classList.add('err');o.textContent='Erreur : '+e;}});
 </script>
 </body>
 </html>
