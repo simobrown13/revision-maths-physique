@@ -119,6 +119,31 @@
   .simbox{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000;margin:0 0 8px}
   .simbox iframe{display:block;width:100%;height:540px;border:0}
   .link{color:var(--accent);font-weight:700}
+  /* ---- Skin Casio Graph 90+E ---- */
+  .casio{background:linear-gradient(160deg,#e2e6eb,#aeb7c1);border:2px solid #8d96a1;border-radius:22px;padding:14px 14px 18px;max-width:370px;margin:0 auto 16px;box-shadow:0 10px 26px rgba(0,0,0,.45),inset 0 1px 0 #fff}
+  .casio .brand{display:flex;justify-content:space-between;align-items:center;margin:2px 4px 11px}
+  .casio .brand .logo{font-weight:800;font-style:italic;font-size:19px;letter-spacing:1px;color:#1f2329}
+  .casio .brand .model{font-size:11px;font-weight:700;color:#3a4048;background:#c7cfd7;border:1px solid #9aa3ad;border-radius:5px;padding:2px 8px}
+  .casio .screen{background:#eef5e8;color:#0c2718;border:6px solid #2b2f36;border-radius:6px;min-height:92px;box-shadow:inset 0 0 0 2px #6b7378}
+  .casio .screen .small{color:#4d6b54}
+  .casio .fkeys{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin:9px 2px 2px}
+  .casio .fkeys span{background:linear-gradient(#41464d,#30343a);color:#e6eaef;border-radius:3px 3px 8px 8px;text-align:center;font-size:10px;font-weight:700;padding:6px 0;border:1px solid #21242a;box-shadow:0 2px 0 #1a1c21}
+  .casio .modes{margin-top:10px}
+  .casio .modes button{background:#c7cfd7;color:#262b31;border:1px solid #9aa3ad;font-weight:700}
+  .casio .modes button.on{background:#f5a623;color:#3a2600;border-color:#d98c0a}
+  .casio .keys button{background:linear-gradient(#4c515a,#3a3f46);color:#f0f3f6;border:1px solid #21242a;box-shadow:0 3px 0 #21242a;font-weight:700}
+  .casio .keys button:active{transform:translateY(3px);box-shadow:none}
+  .casio .keys .fn{color:#86d6ff;font-size:13px}
+  .casio .keys .op{color:#ffd27f}
+  .casio .keys .eq{background:linear-gradient(#3576f6,#1e4fd0);color:#fff;border-color:#1840a8;box-shadow:0 3px 0 #14307e}
+  .casio .keys .ac{background:linear-gradient(#ec6464,#cf3f3f);color:#fff;border-color:#a82a2a;box-shadow:0 3px 0 #872020}
+  .casio .subbtns button{background:#c7cfd7;color:#262b31;border:1px solid #9aa3ad}
+  .casio .subbtns button.on{background:#f5a623;color:#3a2600;border-color:#d98c0a}
+  .casio label{color:#262b31}
+  .casio input[type=text]{background:#eef5e8;color:#0c2718;border:1px solid #8a929b}
+  .casio .go{background:linear-gradient(#3576f6,#1e4fd0);color:#fff}
+  .casio .tip{color:#3a4048}
+  .casio .out{background:#0c2718;border-color:#2b2f36}
 </style>
 </head>
 <body>
@@ -254,8 +279,10 @@
 
   <h3>📱 Calculette Casio — version téléphone (hors-ligne)</h3>
   <p class="tip">Réplique <b>fonctionnelle</b> (pas le firmware Casio) : mêmes menus STAT / DIST, + dérivée &amp; intégrale. Entraîne-toi aux gestes ici, exécute-les sur ta vraie Casio le jour J.</p>
-  <div class="calc">
+  <div class="calc casio">
+    <div class="brand"><span class="logo">CASIO</span><span class="model">GRAPH 90+E</span></div>
     <div class="screen"><span class="small" id="sc-small">&nbsp;</span><span class="main" id="sc-main">0</span></div>
+    <div class="fkeys"><span>F1</span><span>F2</span><span>F3</span><span>F4</span><span>F5</span><span>F6</span></div>
     <div class="modes">
       <button data-m="run" class="on">RUN</button>
       <button data-m="stat">STAT</button>
@@ -271,8 +298,8 @@
         <button class="fn" data-k="ln(">ln</button><button class="fn" data-k="log(">log</button><button class="fn" data-k="exp(">eˣ</button><button class="op" data-k="(">(</button><button class="op" data-k=")">)</button>
         <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button class="op" data-k="×">×</button><button class="op" data-k="÷">÷</button>
         <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button class="op" data-k="+">+</button><button class="op" data-k="−">−</button>
-        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="fn" data-k="π">π</button><button class="ac" id="k-ac">AC</button>
-        <button data-k="0">0</button><button data-k=".">.</button><button data-k="E">EXP</button><button id="k-del">DEL</button><button class="eq" id="k-eq">=</button>
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button class="fn" data-k="π">π</button><button class="ac" id="k-ac">AC/ON</button>
+        <button data-k="0">0</button><button data-k=".">.</button><button data-k="E">EXP</button><button id="k-del">DEL</button><button class="eq" id="k-eq">EXE</button>
       </div>
       <p class="tip">EXP = ×10ˣ (tape <code>1 EXP 99</code> pour 1E99). Multiplication implicite OK : <code>4x</code>, <code>2(3+1)</code>.</p>
     </div>
