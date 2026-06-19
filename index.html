@@ -113,6 +113,9 @@
   .analogy::before{content:"🔎 Image : ";color:var(--accent);font-weight:700}
   .keyidea{background:#0b1220;border:1px solid var(--line);border-radius:8px;padding:8px 11px;margin:8px 0;font-size:13.5px}
   .enclair{font-size:13px;color:var(--green);font-style:italic;margin:4px 0 0}
+  .ytlink{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:#7f1d1d;color:#fff;text-decoration:none;border-radius:9px;padding:10px 14px;font-size:14px;font-weight:700;border:1px solid #b91c1c}
+  .ytlink:active{transform:scale(.98)}
+  .ytlink .yt{background:#fff;color:#ef4444;border-radius:5px;padding:0 6px;font-size:13px;font-weight:900;line-height:1.5}
 </style>
 </head>
 <body>
@@ -290,6 +293,8 @@
     </div>
   </div>
 
+  <a class="ytlink" href="https://www.youtube.com/results?search_query=Casio+Graph+90+E+statistiques+regression+loi+normale+binomiale+tutoriel" target="_blank" rel="noopener"><span class="yt">▶</span> Tuto vidéo : la Casio Graph 90+E</a>
+
   <h3>Accès</h3>
   <div class="card"><code>MENU</code> → icône <b>STAT</b>. Pour les lois : depuis STAT, <code>DIST</code> (F5).</div>
 
@@ -356,6 +361,7 @@
     <p><b>r (coefficient de corrélation)</b> = une <b>note de qualité</b> entre −1 et 1. Plus |r| est proche de 1, plus les points sont alignés et plus la droite est fiable. Proche de 0 = nuage dispersé.</p>
     <div class="analogy">estimer le prix d'une voiture d'occasion selon son âge — plus elle est vieille, moins elle vaut. La droite résume cette tendance et te permet de <b>prévoir</b> un prix.</div>
     <p class="enclair">À l'examen : la calculatrice fait TOUT (STAT → REG). Toi tu lis a, b, r et tu écris la phrase de conclusion sur r.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=ajustement+affine+regression+lineaire+Casio+Graph+90+BTS" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">Logements livrés par année (x = rang, 0 en 2020) :<br>
@@ -381,6 +387,7 @@
     <div class="analogy">la taille des élèves d'une classe : la plupart proches de la moyenne, peu de très grands ou très petits → courbe en cloche → normale.</div>
     <p><b>Astuce qui rapporte :</b> « au moins un » = 1 − P(aucun) = 1 − P(X = 0). Bien plus rapide que tout additionner.</p>
     <p class="enclair">Espérance E(X) = n·p = le nombre moyen de succès attendu.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=loi+binomiale+calculatrice+Casio+Graph+90+BTS" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">4 % des pièces sont défectueuses, on en prélève 30.
@@ -402,6 +409,7 @@
     <div class="analogy">tu remplis une proportion de la cloche avec de la peinture : Ncd te donne la surface peinte entre deux bords, InvN te dit où mettre le bord pour peindre exactement X %.</div>
     <p>⚠️ On entre <b>σ</b> (l'écart-type), <b>pas σ²</b> (la variance). Si l'énoncé donne la variance, prends d'abord sa racine carrée.</p>
     <p class="enclair">Bornes infinies : P(X ≤ k) → Lower = -1E99 · P(X ≥ k) → Upper = 1E99.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=loi+normale+calculatrice+Casio+Ncd+InvN+BTS" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">Diamètre d'une pièce : N(μ = 50 mm ; σ = 0,4).
@@ -421,6 +429,7 @@
     <div class="analogy">la dérivée, c'est comme la <b>vitesse</b> d'une voiture. Vitesse positive → tu avances (la position monte) ; à l'instant où tu fais demi-tour, ta vitesse passe par 0 → c'est ton point le plus éloigné (un extremum).</div>
     <p><b>À quoi ça sert :</b> trouver le <b>maximum ou le minimum</b> d'une fonction (le point le plus haut / le plus bas) → c'est là où f'(x) = 0 en changeant de signe.</p>
     <p class="enclair">Pour calculer f'(x) : on applique les formules du Mémo — (xⁿ)' = n·xⁿ⁻¹, (eˣ)' = eˣ, produit (uv)' = u'v + uv'…</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=calculer+derivee+tableau+de+variations+terminale+Yvan+Monka" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">1. f(x) = x³ − 3x² + 4 : f'(x), f'(x)=0, variations, extrema.<br>
@@ -440,6 +449,7 @@
     <div class="analogy">l'intégrale, c'est <b>cumuler</b>. Si f est la vitesse, l'aire sous la courbe = la <b>distance</b> parcourue. Si f est un débit d'eau, l'aire = le <b>volume</b> qui a rempli la cuve.</div>
     <p><b>Valeur moyenne</b> sur [a, b] = l'aire « étalée » uniformément = (1/(b−a)) × ∫ₐᵇ f. C'est la hauteur moyenne de la courbe.</p>
     <p class="enclair">Filet de sécurité : même si tu rates la primitive, la calculette (onglet Casio) calcule l'intégrale → tu gardes les points du résultat.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=calcul+integral+primitive+aire+sous+la+courbe+terminale" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">1. ∫₁³ (x²−2x+1) dx<br>2. Valeur moyenne de x²−2x+1 sur [1;3]<br>3. ∫₀² e^(0,5x) dx</div>
@@ -467,6 +477,7 @@
     <div class="analogy">R, c'est l'épaisseur d'un <b>manteau</b> : plus il est épais, moins tu as froid. Et plus il fait froid dehors (ΔT grand) ou plus le mur est grand (S grand), plus la maison perd vite sa chaleur.</div>
     <p><b>L'enchaînement à reproduire :</b> e, λ → R de chaque couche → R_tot (on additionne) → U = 1/R_tot → Φ = U·S·ΔT → énergie sur la durée (E = Φ·t).</p>
     <p class="enclair">⚠️ Toujours convertir les épaisseurs en <b>mètres</b> avant de calculer (cm → m). C'est l'erreur n°1.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=resistance+thermique+coefficient+U+flux+thermique+batiment+exercice" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">Toiture (int.→ext.) : plâtre 1,3 cm λ=0,25 · laine 24 cm λ=0,040 · bois 2 cm λ=0,15. S=60 m², int 20°C, ext −8°C.
@@ -491,6 +502,7 @@
     <div class="keyidea"><b>Équilibre = 2 conditions :</b><br>① <b>ΣF = 0</b> : ce qui pousse vers le haut compense le bas.<br>② <b>ΣM = 0</b> : ce qui fait tourner d'un côté compense l'autre.</div>
     <div class="analogy">une <b>balançoire</b> : si quelqu'un s'assoit plus près d'un bout, ce bout porte plus de poids. L'appui le plus proche de la charge supporte le plus.</div>
     <p class="enclair">Astuce qui rapporte : prends les moments <b>par rapport à un appui</b> → son bras de levier est nul, sa réaction disparaît, et tu trouves l'autre directement.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=equilibre+statique+poutre+reaction+appui+moment+exercice" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">Poutre 4 m, appuis A (gauche) / B (droite). Charges : 2000 N à 1 m de A, 3000 N à 3 m de A.
@@ -513,6 +525,7 @@
     <div class="analogy">chaque unité de pH = un facteur <b>×10</b> : un pH de 3 est 10 fois plus acide qu'un pH de 4, et 100 fois plus qu'un pH de 5.</div>
     <div class="keyidea"><b>Dosage</b> : on verse une solution connue dans l'inconnue jusqu'à l'<b>équivalence</b> (le moment exact où les deux se neutralisent). À ce point : <b>c_a·V_a = c_b·V_b</b> → on en déduit la concentration inconnue.</div>
     <p class="enclair">L'équivalence = ni trop, ni trop peu : pile la quantité pour tout neutraliser.</p>
+    <a class="ytlink" href="https://www.youtube.com/results?search_query=concentration+molaire+pH+dosage+acide+base+exercice+seconde+terminale" target="_blank" rel="noopener"><span class="yt">▶</span> Réviser en vidéo</a>
   </div></details>
   <div class="exo">
     <div class="q">1. 8 g de CaCl₂ (M=111) dans 400 mL : n puis c.<br>
